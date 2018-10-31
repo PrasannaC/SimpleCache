@@ -2,16 +2,25 @@ package DoubleLinkedList
 
 import "fmt"
 
+/*
+	Structure of the linked list node
+*/
 type Node struct {
 	data       interface{}
 	next, prev *Node
 }
 
+/*
+	Structure of the linked list
+*/
 type DoubleLinkedList struct {
 	head, tail *Node
 	Size       uint64
 }
 
+/*
+	Create and add a node to the first position of linked list
+*/
 func (d *DoubleLinkedList) AddHead(value interface{}) {
 	newNode := &Node{data: value}
 	if d.head == nil && d.tail == nil {
@@ -26,10 +35,13 @@ func (d *DoubleLinkedList) AddHead(value interface{}) {
 		newNode.next = d.head
 		d.head.prev = newNode
 		d.head = newNode
-		d.Size ++
+		d.Size++
 	}
 }
 
+/*
+	Removes the node from the last position of the linked list
+*/
 func (d *DoubleLinkedList) RemoveTail() {
 	currentNode := d.tail
 	d.tail = currentNode.prev
@@ -37,6 +49,9 @@ func (d *DoubleLinkedList) RemoveTail() {
 	currentNode = nil
 }
 
+/*
+	Accepts a value and delete nodes matching that value
+*/
 func (d *DoubleLinkedList) Remove(value interface{}) {
 	currentNode := d.head
 	for ; currentNode.data != value; currentNode = currentNode.next {
@@ -68,6 +83,9 @@ func (d *DoubleLinkedList) Remove(value interface{}) {
 	d.Size--
 }
 
+/*
+	Prints out the linked list in L-R and R-L manner
+*/
 func (d *DoubleLinkedList) Print() {
 	fmt.Println("\nL - R")
 	currentNode := d.head
@@ -81,6 +99,9 @@ func (d *DoubleLinkedList) Print() {
 	}
 }
 
+/*
+	Iterator of the linked list. Returns a channel containing all nodes of the linked list
+*/
 func (d *DoubleLinkedList) Iterate() <-chan interface{} {
 	c := make(chan interface{})
 	go func() {
