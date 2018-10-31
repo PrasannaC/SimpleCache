@@ -1,5 +1,5 @@
 # SimpleCache
-A simple n-way set associative cache implemented in Go
+A simple n-way set associative, LRU cache implemented in Go
 
 ## Usage
 ```Go
